@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import Button from "../../Button";
 import { AnimationContainer, Background, Container, Content } from "./styles";
+import Input from "../../Input"
 
 function Signup (){
     return (
@@ -10,10 +11,14 @@ function Signup (){
              <AnimationContainer>
                 <form>
                     <h1> Cadastro </h1>
-                    <input></input>
-                    <input></input>
-                    <input></input>
-                    <input></input>
+                    <Input label="Nome" placeholder="Seu nome" />
+                    <Input label="Email" placeholder="Seu melhor email"/>
+                    <Input label="Senha" placeholder="Uma senha bem segura"type="password" /> 
+                    <Input
+                    label="Confirmação de senha"
+                    placeholder="Confirmação da senha"
+                    type="password"
+                    />
                     <Button> Enviar </Button>
                     <p>
                         Já tem uma conta? Faça seu <Link to="/link"> Login</Link> 
