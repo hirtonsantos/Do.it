@@ -13,7 +13,7 @@ export default function Home() {
         <span> Organize-se de forma fácil e efetiva </span>
         <div>
           <Button onClick={() => history.push("/signup")} whiteSchema> Cadastra-se </Button>
-          <Button> Login </Button>
+          <Button onClick={() => history.push("/login")}> Login </Button>
         </div>
       </Content>
     </Container>

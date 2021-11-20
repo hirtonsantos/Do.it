@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../../Button";
-import { AnimationContainer, Background, Container, Content } from "./styles";
+import { AnimationContainer, Background, Container, Content } from "./style";
 import Input from "../../Input";
 import api from "../../services/api"
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
@@ -9,17 +9,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-hot-toast";
 
-function Signup() {
+function Login() {
   const schema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup
       .string()
       .min(8, "Minimo de 8 digitos")
-      .required("Campo obrigatório"),
-    passwordConfirm: yup
-      .string()
-      .oneOf([yup.ref("password")], "Senhas diferentes")
       .required("Campo obrigatório"),
   });
 
@@ -41,19 +36,10 @@ function Signup() {
 
   return (
     <Container>
-      <Background />
       <Content>
         <AnimationContainer>
           <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1> Cadastro </h1>
-            <Input
-              register={register}
-              icon={FiUser}
-              label="Nome"
-              placeholder="Seu nome"
-              name="name"
-              error={errors.name?.message}
-            />
+            <h1> Login </h1>
             <Input
               register={register}
               icon={FiMail}
@@ -71,24 +57,16 @@ function Signup() {
               type="password"
               error={errors.password?.message}
             />
-            <Input
-              register={register}
-              name="passwordConfirm"
-              icon={FiLock}
-              label="Confirmação de senha"
-              placeholder="Confirmação da senha"
-              type="password"
-              error={errors.passwordConfirm?.message}
-            />
             <Button type="submit"> Enviar </Button>
             <p>
-              Já tem uma conta? Faça seu <Link to="/login"> Login</Link>
+              Não tem uma conta? Faça seu <Link to="/signup"> Cadastro </Link>
             </p>
           </form>
         </AnimationContainer>
       </Content>
+      <Background />
     </Container>
   );
 }
 
-export default Signup;
+export default Login;
