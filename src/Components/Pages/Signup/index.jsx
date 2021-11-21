@@ -8,8 +8,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-hot-toast";
+import { Redirect, useHistory } from "react-router";
 
-function Signup() {
+function Signup({authenticated}) {
   const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
@@ -31,12 +32,19 @@ function Signup() {
     resolver: yupResolver(schema),
   });
 
+  const history = useHistory()
+
   const onSubmitFunction = ({name, email, password}) => {
     const user = {name, email, password}
     api.post("/user/register", user).then((_) =>{
       toast.success("Requisição aprovada")
+      return history.pushState("/login")
     })
     .catch((err) => toast.error("Requisição falhou"))
+  }
+
+  if (authenticated){
+    return <Redirect to="/dashboard"/>
   }
 
   return (
